@@ -12,6 +12,7 @@ import './style.scss';
 import Header from 'header';
 import StorePerformance from './store-performance';
 import TopSellingProducts from './top-selling-products';
+import ChartBlock from './chart-block';
 import { ReportFilters } from '@woocommerce/components';
 
 export default class Dashboard extends Component {
@@ -25,6 +26,9 @@ export default class Dashboard extends Component {
 				<div className="woocommerce-dashboard__columns">
 					<div>
 						<TopSellingProducts />
+					</div>
+					<div>
+						<ChartBlock />
 					</div>
 				</div>
 			</Fragment>
