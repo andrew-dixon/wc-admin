@@ -11,7 +11,6 @@ import { map } from 'lodash';
  */
 import { Link } from '@woocommerce/components';
 import { formatCurrency, getCurrencyFormatDecimal } from '@woocommerce/currency';
-import { getNewPath, getPersistedQuery } from '@woocommerce/navigation';
 
 /**
  * Internal dependencies
@@ -76,12 +75,6 @@ export default class CategoriesReportTable extends Component {
 				extended_info,
 			} = category;
 			const { name } = extended_info;
-			const persistedQuery = getPersistedQuery( this.props.query );
-
-			// @TODO it should link to the Products report filtered by category, which we don't currently do for single categories.
-			const productsLink = getNewPath( persistedQuery, 'products' );
-			// @TODO it should link to the Orders report filtered by category, which we don't currently do for categories.
-			const ordersLink = getNewPath( persistedQuery, 'orders' );
 
 			return [
 				{
@@ -104,19 +97,11 @@ export default class CategoriesReportTable extends Component {
 					value: getCurrencyFormatDecimal( gross_revenue ),
 				},
 				{
-					display: (
-						<Link href={ productsLink } type="wc-admin">
-							{ numberFormat( products_count ) }
-						</Link>
-					),
+					display: numberFormat( products_count ),
 					value: products_count,
 				},
 				{
-					display: (
-						<Link href={ ordersLink } type="wc-admin">
-							{ numberFormat( orders_count ) }
-						</Link>
-					),
+					display: numberFormat( orders_count ),
 					value: orders_count,
 				},
 			];
