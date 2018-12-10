@@ -5,6 +5,13 @@
  * @package WooCommerce\Tests\API
  * @since 3.5.0
  */
+
+/**
+ * Reports Categories REST API Test Class
+ *
+ * @package WooCommerce\Tests\API
+ * @since 3.5.0
+ */
 class WC_Tests_API_Reports_Categories extends WC_REST_Unit_Test_Case {
 
 	/**
