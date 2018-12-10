@@ -1,0 +1,14 @@
+/** @format */
+
+.woocommerce-dashboard__chart-block {
+	.woocommerce-card__body {
+		padding: 0;
+		position: relative;
+
+		.woocommerce-chart {
+			border: none;
+			margin-bottom: 0;
+			margin-top: 0;
+		}
+	}
+}

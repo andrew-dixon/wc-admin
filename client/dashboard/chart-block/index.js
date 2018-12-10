@@ -9,7 +9,7 @@ import { Component, Fragment } from '@wordpress/element';
  */
 import { Card } from '@woocommerce/components';
 import ReportChart from 'analytics/components/report-chart';
-
+import './style.scss';
 class ChartBlock extends Component {
 	constructor() {
 		super( ...arguments );
@@ -34,10 +34,11 @@ class ChartBlock extends Component {
 		const selectedChart = charts[ 0 ];
 		return (
 			<Fragment>
-				<Card className="woocommerce-dashboard__chart-block">
+				<Card className="woocommerce-dashboard__chart-block" title="Orders Count">
 					<ReportChart
 						charts={ charts }
 						endpoint="orders"
+						mode="block"
 						path={ path }
 						query={ query }
 						selectedChart={ selectedChart }
