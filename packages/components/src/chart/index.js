@@ -113,7 +113,10 @@ class Chart extends Component {
 	}
 
 	handleLegendToggle( event ) {
-		const { data } = this.props;
+		const { data, mode } = this.props;
+		if ( mode ) {
+			return;
+		}
 		const orderedKeys = this.state.orderedKeys.map( d => ( {
 			...d,
 			visible: d.key === event.target.id ? ! d.visible : d.visible,
@@ -238,6 +241,7 @@ class Chart extends Component {
 				data={ orderedKeys }
 				handleLegendHover={ this.handleLegendHover }
 				handleLegendToggle={ this.handleLegendToggle }
+				interactive={ mode !== 'block' }
 				legendDirection={ legendDirection }
 				legendValueFormat={ tooltipValueFormat }
 				totalLabel={ sprintf( itemsLabel, orderedKeys.length ) }
