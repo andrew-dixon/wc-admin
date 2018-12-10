@@ -173,6 +173,7 @@ export default class CustomersReportTable extends Component {
 			<ReportTable
 				compareBy="customers"
 				endpoint="customers"
+				extendItemsMethodName="isGetOrdersRequesting"
 				getHeadersContent={ this.getHeadersContent }
 				getRowsContent={ this.getRowsContent }
 				itemIdField="id"

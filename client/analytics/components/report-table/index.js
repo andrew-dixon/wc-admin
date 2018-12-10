@@ -5,7 +5,6 @@
 import { applyFilters } from '@wordpress/hooks';
 import { Component } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
-import { withSelect } from '@wordpress/data';
 import { get, orderBy } from 'lodash';
 import PropTypes from 'prop-types';
 
@@ -20,6 +19,7 @@ import { onQueryChange } from '@woocommerce/navigation';
  */
 import ReportError from 'analytics/components/report-error';
 import { getReportChartData, getReportTableData } from 'store/reports/utils';
+import withSelect from 'wc-api/with-select';
 
 const TABLE_FILTER = 'woocommerce_admin_report_table';
 
@@ -122,18 +122,42 @@ ReportTable.defaultProps = {
 	tableQuery: {},
 };
 
+const extendItemsData = ( select, props, items ) => {
+	const { extendItemsMethodName, query } = props;
+	if ( ! Array.isArray( items ) || ! extendItemsMethodName ) {
+		return items;
+	}
+	const { [ extendItemsMethodName ]: methodName } = select( 'wc-api' );
+	const name = methodName( query ).toString();
+
+	return items.map( item => {
+		return {
+			name,
+			...item,
+		};
+	} );
+};
+
 export default compose(
 	withSelect( ( select, props ) => {
 		const { endpoint, getSummary, query, tableData, tableQuery } = props;
+
 		const chartEndpoint = 'variations' === endpoint ? 'products' : endpoint;
 		const primaryData = getSummary
 			? getReportChartData( chartEndpoint, 'primary', query, select )
 			: {};
 		const queriedTableData = tableData || getReportTableData( endpoint, query, select, tableQuery );
+		const extendedTableData = {
+			...queriedTableData,
+			items: {
+				...queriedTableData.items,
+				data: extendItemsData( select, props, queriedTableData.items.data ),
+			},
+		};
 
 		return {
 			primaryData,
-			tableData: queriedTableData,
+			tableData: extendedTableData,
 		};
 	} )
 )( ReportTable );
