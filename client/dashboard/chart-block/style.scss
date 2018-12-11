@@ -12,6 +12,9 @@
 
 			.woocommerce-legend__item > button {
 				cursor: default;
+				&:hover {
+					background: $core-grey-light-100;
+				}
 				.woocommerce-legend__item-container {
 					cursor: default;
 					.woocommerce-legend__item-checkmark.woocommerce-legend__item-checkmark-checked::after {
@@ -19,6 +22,17 @@
 					}
 				}
 			}
+
+			&:hover {
+				background: $core-grey-light-100;
+				.woocommerce-legend__item > button {
+					background: $core-grey-light-100;
+				}
+			}
 		}
+	}
+
+	&:hover {
+		background: $core-grey-light-100;
 	}
 }
